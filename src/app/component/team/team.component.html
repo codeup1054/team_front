@@ -1,0 +1,108 @@
+
+<mat-toolbar color="primary">
+  <span>Команда</span>
+  <span class="example-spacer"></span>
+  <button mat-raised-button (click)="openAddEditEmpForm()">
+    Добавить участника
+  </button>
+</mat-toolbar>
+<div class="main-body">
+
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Петров" #input>
+  </mat-form-field>
+
+  <router-outlet></router-outlet>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row">
+          {{row.id}}
+        </td>
+      </ng-container>
+
+      <!--          <button mat-icon-button color="primary" (click)="openEditForm(row)">-->
+      <!--            <mat-icon>edit</mat-icon>-->
+      <!--          </button>-->
+      <!-- Progress Column -->
+
+      <ng-container matColumnDef="fio">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ФИО / Edit </th>
+        <td mat-cell *matCellDef="let row"  (click)="openEditForm(row)"  >
+          <span role="button">{{row.fio}}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="firstname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Имя </th>
+        <td mat-cell *matCellDef="let row"> {{row.firstname}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Статус </th>
+        <td mat-cell *matCellDef="let row"> {{row.status}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Имя </th>
+        <td mat-cell *matCellDef="let row"> {{row.phone}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </th>
+        <td mat-cell *matCellDef="let row"> {{row.email}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="date_start">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Начало работы </th>
+        <td mat-cell *matCellDef="let row"> {{row.date_start | date}}</td>
+      </ng-container>
+      <ng-container matColumnDef="date_end">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Завершение работы </th>
+        <td mat-cell *matCellDef="let row"> {{row.date_end | date}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Спец. </th>
+        <td mat-cell *matCellDef="let row"> {{row.role}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="company_name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Компания </th>
+        <td mat-cell *matCellDef="let row"> {{row.company_name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="grade">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Грейд </th>
+        <td mat-cell *matCellDef="let row"> {{row.grade | currency:'₽': 'symbol' : '1.0-0'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button color="warn" (click)="deleteEmployee(row.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[30, 70, 200]" aria-label="Select page of users"></mat-paginator>
+  </div>
+</div>

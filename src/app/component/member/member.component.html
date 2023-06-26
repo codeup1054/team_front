@@ -1,0 +1,111 @@
+<div mat-dialog-title>
+  <h1>Team Member Form</h1>
+</div>
+
+<!--id_ext, status, fio, company, role, date_start, date_end, grade-->
+
+<form [formGroup]="empForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>ID</mat-label>
+        <input matInput type="id" placeholder="Идентификатор" formControlName="id">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Внешний ID</mat-label>
+        <input matInput [readonly]=false type="phone" placeholder="Внешний идентификатор" formControlName="id_ext">
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Фамилия</mat-label>
+        <input matInput  type="text" placeholder="Фамилия Имя" formControlName="fio">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Имя</mat-label>
+        <input matInput placeholder="Укажите имя" formControlName="firstname">
+      </mat-form-field>
+    </div>
+
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" placeholder="Ex. test@gmail.com" formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Телефон</mat-label>
+        <input matInput [readonly]=false type="phone" placeholder="+71234567890" formControlName="phone">
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>Компания</mat-label>
+        <mat-select formControlName="company_name">
+          <mat-option *ngFor="let val of company_names" [value]="val">{{val}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Специализация</mat-label>
+        <mat-select formControlName="role">
+          <mat-option *ngFor="let val of role" [value]="val">{{val}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!--        <mat-form-field appearance="outline">-->
+      <!--          <mat-label>Специализация</mat-label>-->
+      <!--          <input matInput type="grade" placeholder="grade" formControlName="role">-->
+      <!--        </mat-form-field>-->
+
+      <mat-form-field appearance="outline">
+        <mat-label>Grade</mat-label>
+        <input matInput [readonly]="!editable" type="grade" placeholder="grade" formControlName="grade">
+      </mat-form-field>
+
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Статус</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let val of status" [value]="val">{{val}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>Start date</mat-label>
+        <input matInput [matDatepicker]="picker_start" formControlName="date_start">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker_start"></mat-datepicker-toggle>
+        <mat-datepicker #picker_start></mat-datepicker>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>End date</mat-label>
+        <input matInput [matDatepicker]="picker_end" formControlName="date_end">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker_end"></mat-datepicker-toggle>
+        <mat-datepicker #picker_end></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+
+
+  </div>
+  <div mat-dialog-actions class="action">
+    <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">{{data ? 'Update': 'Save'}}</button>
+  </div>
+</form>

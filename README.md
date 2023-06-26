@@ -1,9 +1,9 @@
 https://youtu.be/nz0hPdvrCg8?t=418  - Router в  Menu
 # CrudApp
 1. git clone https://github.com/codeup1054/emp-hml-crud
-2. npm install  - для старта проект 
-3. ng serve --watch стартуем 
-4.  ng    
+2. npm install  - для старта проект
+3. npm install -g @angular/cli
+4. ng serve --watch стартуем 
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.1.
