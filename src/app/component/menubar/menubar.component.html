@@ -1,10 +1,22 @@
 <!--https://youtu.be/nz0hPdvrCg8?t=418-->
-
 <mat-toolbar color="primary" class="mat-elevation-z8">
   <button mat-icon-button >
-      <mat-icon>menu</mat-icon>
+    <mat-icon>menu</mat-icon>
   </button>
-  <button mat-menu-item routerLink="company"  mat-button >Компании</button>
-  <button mat-menu-item routerLink="team" mat-button>Команда</button>
-  <button mat-menu-item mat-button>График</button>
+  <span>TEAM</span>
+  <span class="example-spacer"></span>
+  <button [matMenuTriggerFor]="lvl1master" mat-button >Справочники</button>
+  <mat-menu #lvl1master="matMenu" >
+    <button mat-menu-item routerLink="team">
+      <mat-icon>contacts</mat-icon>
+      <span>Команда</span>
+    </button>
+    <button mat-menu-item >
+      <mat-icon>bar_chart</mat-icon>
+      <span>График</span></button>
+  </mat-menu>
+  <button routerLink="team" mat-button>Команда</button>
+  <button mat-button>График</button>
+  <button mat-raised-button color="warn">Войти</button>
+  <button mat-icon-button><mat-icon>exit_to_app</mat-icon></button>
 </mat-toolbar>

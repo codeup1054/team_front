@@ -14,8 +14,6 @@ import { CoreService } from './core/core.service';
 })
 export class AppComponent implements OnInit {
 
-
-
   displayedColumns: string[] = [
     'id',
     'id_ext',
@@ -44,7 +42,7 @@ export class AppComponent implements OnInit {
     this.getEmployeeList();
   }
 
-  openAddEditEmpForm() {
+  openAddEditTeamForm() {
     const dialogRef = this._dialog.open(MemberAddEditComponent);
     dialogRef.afterClosed().subscribe({
       next: (val) => {
@@ -78,7 +76,7 @@ export class AppComponent implements OnInit {
   deleteEmployee(id: number) {
     this._memberService.deleteMember(id).subscribe({
       next: (res) => {
-        this._coreService.openSnackBar('Member deleted!', 'done');
+        this._coreService.openSnackBar('Member deleted!'+res.fio, 'done');
         this.getEmployeeList();
       },
       error: console.log,
