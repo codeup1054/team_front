@@ -1,19 +1,16 @@
-
-<mat-toolbar color="primary">
-  <span>Команда</span>
-  <span class="example-spacer"></span>
-  <button mat-raised-button (click)="openAddEditEmpForm()">
-    Добавить участника
-  </button>
-</mat-toolbar>
 <div class="main-body">
+  <mat-toolbar color="" class="mat-elevation-z11">
+    <mat-form-field>
+      <mat-label>Контекстный поиск</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Текст..." #input>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Петров" #input>
-  </mat-form-field>
+    <span class="example-spacer"></span>
 
-  <router-outlet></router-outlet>
+    <button mat-raised-button (click)="openAddEditEmpForm()">
+      Добавить участника
+    </button>
+  </mat-toolbar>
 
   <div class="table-container">
     <table mat-table [dataSource]="dataSource" matSort>

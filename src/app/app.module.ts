@@ -28,12 +28,18 @@ import {MemberAddEditComponent} from './component/member/member.component';
 import {MenubarComponent} from './component/menubar/menubar.component';
 import {CompanyComponent} from './component/company/company.component';
 import {TeamComponent} from './component/team/team.component';
+import {CrudformComponent} from './component/crudform/crudform.component';
 import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
-  declarations: [AppComponent,
-    MemberAddEditComponent, MenubarComponent,
-    CompanyComponent, TeamComponent, MemberAddEditComponent],
+    declarations: [AppComponent,
+        MemberAddEditComponent,
+        MenubarComponent,
+        CompanyComponent,
+        TeamComponent,
+        MemberAddEditComponent,
+        CrudformComponent
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,

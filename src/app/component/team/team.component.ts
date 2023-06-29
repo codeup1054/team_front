@@ -12,8 +12,10 @@ import { CoreService } from '../../core/core.service';
   templateUrl: './team.component.html',
   styleUrls: ['./team.component.scss'],
 })
+
 export class TeamComponent implements OnInit {
   displayedColumns: string[] = [
+    'action',
     'id',
     'firstname',
     'fio',
@@ -24,7 +26,6 @@ export class TeamComponent implements OnInit {
     'grade',
     'date_start',
     'date_end',
-    // 'action',
     // 'package',
   ];
   dataSource!: MatTableDataSource<any>;
