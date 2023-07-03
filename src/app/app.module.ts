@@ -23,6 +23,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatMenuModule} from "@angular/material/menu";
 
 
 import {AppRoutingModule} from './app-routing.module';
@@ -33,7 +34,7 @@ import {MenubarComponent} from './component/menubar/menubar.component';
 import {CompanyComponent} from './component/company/company.component';
 import {TeamComponent} from './component/team/team.component';
 import {CrudformComponent} from './component/crudform/crudform.component';
-import {MatMenuModule} from "@angular/material/menu";
+import {CutTextPipe} from './component/crudform/crudform.pipes';
 import {SandboxComponent} from "./component/sandbox/sandbox.component";
 
 
@@ -46,6 +47,7 @@ import {SandboxComponent} from "./component/sandbox/sandbox.component";
         MemberAddEditComponent,
         CrudformComponent,
         SandboxComponent,
+        CutTextPipe,
     ],
     imports: [
         BrowserModule,

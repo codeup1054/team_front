@@ -7,6 +7,7 @@ import {CoreService} from "../../core/core.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 
+
 //
 // @Pipe({
 //   name: 'asType',
@@ -86,8 +87,8 @@ export class SandboxComponent implements OnInit{
 
   ngOnInit():void
   {
-    this.paginator.pageSizeOptions=[11,30,100];
-    this.paginator._intl.itemsPerPageLabel="Test String";
+    // this.paginator.pageSizeOptions= MatPaginator[11,30,100];
+    // this.paginator._intl.itemsPerPageLabel="Test String";
   }
 
 
