@@ -18,12 +18,13 @@ export class CompanyComponent implements OnInit {
 
   displayedColumns: string[] =
   [
-  'id',
-  'name',
-  'manager',
-  'contacts',
-  'date_start',
-  'date_end'
+    'id',
+    'id_ext',
+    'company_name',
+    'contacts',
+    'manager',
+    'date_start',
+    'date_end'
   ];
   dataSource!: MatTableDataSource<any>;
 
@@ -50,7 +51,7 @@ export class CompanyComponent implements OnInit {
   }
 
   getItemList() {
-    this._crudService.getItemList().subscribe({
+    this._crudService.getItemList('company').subscribe({
       next: (res) => {
         console.log("@@ getItemList",res);
         this.dataSource = new MatTableDataSource(res);

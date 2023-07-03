@@ -1,6 +1,10 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+// import { registerLocaleData } from '@angular/common';
+// import localeRu from '@angular/common/locales/ru';
+// registerLocaleData(localeRu, 'ru');
 
+import {LOCALE_ID, NgModule} from '@angular/core';
+
+import {BrowserModule} from '@angular/platform-browser';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -30,6 +34,7 @@ import {CompanyComponent} from './component/company/company.component';
 import {TeamComponent} from './component/team/team.component';
 import {CrudformComponent} from './component/crudform/crudform.component';
 import {MatMenuModule} from "@angular/material/menu";
+
 
 @NgModule({
     declarations: [AppComponent,
@@ -62,7 +67,9 @@ import {MatMenuModule} from "@angular/material/menu";
         MatSnackBarModule,
         MatMenuModule,
     ],
-  providers: [],
+  providers: [
+      // { provide: LOCALE_ID, useValue: "ru" }, //replace "en-US" with your locale
+      ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

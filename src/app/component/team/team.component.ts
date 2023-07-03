@@ -57,7 +57,7 @@ export class TeamComponent implements OnInit {
   getEmployeeList() {
     this._empService.getMemberList().subscribe({
       next: (res) => {
-        console.log("@@ getEmployeeList",res);
+        console.log("@@ getMemberList",res);
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;

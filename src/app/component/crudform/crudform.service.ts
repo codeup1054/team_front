@@ -16,8 +16,8 @@ export class CrudService {
     return this._http.put(`http://localhost:3000/api/v1/data/${id}`, data);
   }
 
-  getItemList(): Observable<any> {
-    return this._http.get('http://localhost:3000/api/v1/data/');
+  getItemList(entitytype: string): Observable<any> {
+    return this._http.get(`http://localhost:3000/api/v1/data/${entitytype}/`);
   }
 
   deleteItem(id: number): Observable<any> {

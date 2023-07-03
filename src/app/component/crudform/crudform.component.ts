@@ -70,7 +70,7 @@ export class CrudformComponent implements OnInit {
 
     ngOnInit(): void {
         this.crudForm.patchValue(this.data);
-        const compService = this._crudService.getItemList();
+        const compService = this._crudService.getItemList('company');
         // console.log(compService)
     }
 
