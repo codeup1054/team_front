@@ -34,6 +34,7 @@ import {CompanyComponent} from './component/company/company.component';
 import {TeamComponent} from './component/team/team.component';
 import {CrudformComponent} from './component/crudform/crudform.component';
 import {MatMenuModule} from "@angular/material/menu";
+import {SandboxComponent} from "./component/sandbox/sandbox.component";
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import {MatMenuModule} from "@angular/material/menu";
         CompanyComponent,
         TeamComponent,
         MemberAddEditComponent,
-        CrudformComponent
+        CrudformComponent,
+        SandboxComponent,
     ],
     imports: [
         BrowserModule,

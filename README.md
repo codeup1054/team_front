@@ -1,12 +1,10 @@
-https://youtu.be/nz0hPdvrCg8?t=418  - Router в  Menu
-## CrudApp
 
-
-## create component 
+### 2023-07-03 
 
 
 
 ## 2023-06-27  Tree menu
+https://youtu.be/nz0hPdvrCg8?t=418  - Router в  Menu
 https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/ 
 
 
