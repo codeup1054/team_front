@@ -1,7 +1,5 @@
-
 ### 2023-07-03 
-
-
+2023-07-03  Dynamic columns Date format
 
 ## 2023-06-27  Tree menu
 https://youtu.be/nz0hPdvrCg8?t=418  - Router в  Menu
