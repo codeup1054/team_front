@@ -14,7 +14,7 @@ import {MemberAddEditComponent} from "../member/member.component";
   styleUrls: ['./company.component.scss']
 })
 
-export class CompanyComponent implements OnInit {
+export class  CompanyComponent implements OnInit {
 
   displayedColumns: string[] =
   [

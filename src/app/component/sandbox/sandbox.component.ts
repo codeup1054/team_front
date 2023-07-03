@@ -1,5 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Pipe, PipeTransform} from '@angular/core';
+import {MatTableDataSource} from "@angular/material/table";
+import {MatDialog} from "@angular/material/dialog";
+import {CrudService} from "../crudform/crudform.service";
+import {CoreService} from "../../core/core.service";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
 
 //
 // @Pipe({
@@ -29,7 +35,7 @@ export interface PeriodicElement {
 const columnTypes: object = { date_start: 'date'} ;
 
 // const ELEMENT_DATA: PeriodicElement[] = [
-const ELEMENT_DATA: object[] = [
+let ELEMENT_DATA: object[] = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', date_start: '2023-07-03'},
   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
@@ -42,10 +48,12 @@ const ELEMENT_DATA: object[] = [
   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
 ];
 
+
+
 let columnNames:string[] = [] ;
 
 ELEMENT_DATA.map(item => {
-  console.log("{@@", Object.keys(item));
+  // console.log("{@@", Object.keys(item));
   columnNames = [...new Set([...Object.keys(item) ,...columnNames ])]
 } );
 
@@ -55,17 +63,46 @@ console.log("{@@ columnNames", columnNames);
 /**
  * @title Table dynamically changing the columns displayed
  */
+
 @Component({
   selector: 'table-dynamic-columns-example',
   styleUrls: ['sandbox.component.scss'],
   templateUrl: 'sandbox.component.html',
 })
-export class SandboxComponent {
+export class SandboxComponent implements OnInit{
 
   displayedColumns: string[] = columnNames;
   columnsToDisplay: string[] = this.displayedColumns.slice();
   data: object[] = ELEMENT_DATA;
   columnTypes: object  = columnTypes;
+  itemType: string = 'item';
+
+
+  /** Get Data*/
+
+  dataSource!: MatTableDataSource<any>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngOnInit():void
+  {
+    this.paginator.pageSizeOptions=[11,30,100];
+    this.paginator._intl.itemsPerPageLabel="Test String";
+  }
+
+
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(
+      private _dialog: MatDialog,
+      private _crudService: CrudService,
+      private _coreService: CoreService
+  ) {}
+
+/** >>> Get Data */
+
+
+
 
   addColumn() {
     const randomColumn = Math.floor(Math.random() * this.displayedColumns.length);
@@ -94,13 +131,39 @@ export class SandboxComponent {
 
 /** 2023-07-03   Get data Table */
 
-  getDataTable()
-  {
+    getItemList() {
+      this._crudService.getItemList('company').subscribe({
+        next: (res) => {
+          this.dataSource = new MatTableDataSource(res);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
 
-  }
+          ELEMENT_DATA = res;
+
+          console.log("@@ getItemList",res)
+
+          columnNames = []
+
+          ELEMENT_DATA.map(item => {
+            console.log("@@ 02", Object.keys(item));
+            columnNames = [...new Set([...Object.keys(item) ,...columnNames ])]
+          } );
+
+          console.log("@@ getItemList",res, columnNames);
+
+          this.displayedColumns = columnNames;
+
+          this.columnsToDisplay = columnNames;
+          this.data = ELEMENT_DATA;
+          this.itemType = 'company';
+
+          this.paginator._intl.itemsPerPageLabel="Компаний на странице";
+          this.paginator.pageSizeOptions=[9,18,37];
+
+
+        },
+        error: console.log,
+      });
+    }
 }
 
-
-/**  Copyright 2019 Google LLC. All Rights Reserved.
- Use of this source code is governed by an MIT-style license that
- can be found in the LICENSE file at http://angular.io/license */
