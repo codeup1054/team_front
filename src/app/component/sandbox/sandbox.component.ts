@@ -6,25 +6,9 @@ import {CrudService} from "../crudform/crudform.service";
 import {CoreService} from "../../core/core.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {User} from "../table_editable/table_editable";
+import {FormBuilder, Validators} from "@angular/forms";
 
-
-//
-// @Pipe({
-//   name: 'asType',
-//   pure: true,
-// })
-// export class AsTypePipe implements PipeTransform
-// {
-//   transform<T>(value: any, clss: new (...args: any[]) => T): T
-//   {
-//     return value as T;
-//   }
-// }
-//
-// Customer
-//
-// public Customer: typeof Customer = Customer; //Type variable to use in templates
-// public customer: Customer; //Case sensitivity allows creating similar variables if needed.
 
 export interface PeriodicElement {
   name: string;
@@ -97,7 +81,8 @@ export class SandboxComponent implements OnInit{
   constructor(
       private _dialog: MatDialog,
       private _crudService: CrudService,
-      private _coreService: CoreService
+      private _coreService: CoreService,
+      private fb: FormBuilder,
   ) {}
 
 /** >>> Get Data */
@@ -141,19 +126,24 @@ export class SandboxComponent implements OnInit{
 
           ELEMENT_DATA = res;
 
-          console.log("@@ getItemList",res)
+          // console.log("@@ getItemList",res)
 
-          columnNames = []
+          columnNames = ['Действия', 'Удалить']
 
-          ELEMENT_DATA.map(item => {
-            console.log("@@ 02", Object.keys(item));
+
+          ELEMENT_DATA = ELEMENT_DATA.map(item => {
+            console.log("@@ 02", item);
+            let _item: {[k: string]: any} = item;
+            // _item = item
+
             columnNames = [...new Set([...Object.keys(item) ,...columnNames ])]
+            _item['Действия'] = '<i class="bi bi-save"></i>'
+            return _item
           } );
 
-          console.log("@@ getItemList",res, columnNames);
+          console.log("@@ ELEMENT_DATA",ELEMENT_DATA);
 
           this.displayedColumns = columnNames;
-
           this.columnsToDisplay = columnNames;
           this.data = ELEMENT_DATA;
           this.itemType = 'company';
@@ -166,5 +156,38 @@ export class SandboxComponent implements OnInit{
         error: console.log,
       });
     }
+
+
+/** 2023-07-04 Editable */
+itemSelected: Item = {} as Item;
+isEditing: boolean = false;
+
+
+form = this.fb.group({
+  firstName: ['', [Validators.required]],
+  lastName: ['', [Validators.required]],
+  email: ['', [Validators.required, Validators.email]]
+});
+
+
+selectItem(item: Item) {
+  if(Object.keys(this.itemSelected).length === 0) {
+    this.itemSelected = item;
+    this.isEditing = true
+
+    this.form.patchValue({
+      firstName: item.firstName,
+      lastName: item.lastName,
+      email: item.email
+    })
+  }
 }
 
+}
+
+export interface Item {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+}

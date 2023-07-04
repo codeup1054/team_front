@@ -1,0 +1,98 @@
+<div class="container">
+    <h1>{{Title | uppercase}}-{{Title|slice:-5:-1}} *** {{Price|number:"7.1-5"}}</h1>
+    <h3>{{jso|json}}</h3>
+    <form [formGroup]="form" (ngSubmit)="update()">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Фамилия</th>
+                <th scope="col">Email Address</th>
+                <th>
+                    <button
+                            type="button"
+                            title="Add New"
+                            class="btn btn-primary"
+                            (click)="addUser()"
+                    >
+                        <i class="bi bi-plus"></i>
+                    </button>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <ng-container *ngFor="let user of users; let i = index">
+                <tr *ngIf="userSelected != user" (click)="selectUser(user)">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <button
+                                class="btn btn-danger btn-sm mx-1"
+                                title="delete"
+                                type="button"
+                                (click)="deleteUser(i)"
+                        >
+                            <i class="bi bi-trash" ></i>
+                        </button>
+                    </td>
+                </tr>
+
+                <tr *ngIf="userSelected == user" class="table-primary">
+                    <td>{{ user.id }}</td>
+                    <td>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="firstName"
+                          [value]="user.firstName"
+                          title="Имя"
+                          />
+
+                    </td>
+
+                    <td>
+                        <input
+                        type="text"
+                        class="form-control"
+                        formControlName="lastName"
+                        [value]="user.lastName"
+                        title="Last Name" />
+                    </td>
+                    <td>
+                        <input
+                                type="text"
+                                class="form-control"
+                                formControlName="email"
+                                [value]="user.email"
+                                title="Email Address"
+                        />
+                    </td>
+                    <td>
+                        <button
+                                class="btn btn-primary btn-sm mx-1"
+                                title="update"
+                                type="submit"
+                                [disabled]="form.invalid" >
+                            <i class="bi bi-save"></i>
+                        </button>
+
+                        <button
+                                class="btn btn-danger btn-sm mx-1"
+                                title="cancel"
+                                (click)="cancel()"
+                                type="button"
+                        >
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-container>
+
+            </tbody>
+        </table>
+    </form>
+</div>
