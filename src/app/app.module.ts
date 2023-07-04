@@ -34,8 +34,10 @@ import {MenubarComponent} from './component/menubar/menubar.component';
 import {CompanyComponent} from './component/company/company.component';
 import {TeamComponent} from './component/team/team.component';
 import {CrudformComponent} from './component/crudform/crudform.component';
-import {CutTextPipe} from './component/crudform/crudform.pipes';
+import {CutTextPipe, ByColumnPipe} from './component/pipe/crudform.pipes';
 import {SandboxComponent} from "./component/sandbox/sandbox.component";
+
+import { TableEditable } from './component/table_editable/table_editable'
 
 
 @NgModule({
@@ -48,6 +50,8 @@ import {SandboxComponent} from "./component/sandbox/sandbox.component";
         CrudformComponent,
         SandboxComponent,
         CutTextPipe,
+        ByColumnPipe,
+        TableEditable
     ],
     imports: [
         BrowserModule,

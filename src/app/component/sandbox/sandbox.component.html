@@ -3,16 +3,19 @@
 <button mat-raised-button (click)="addColumn()"> Add column </button>
 <button mat-raised-button (click)="removeColumn()"> Remove column </button>
 <button mat-raised-button (click)="shuffle()"> Shuffle </button>
-<button mat-raised-button (click)="getItemList()"> Get company </button>
+<button class="border bg-orange-400 rounded-5  w-full py-0 px-4 mb-0 " mat-raised-button (click)="getItemList()">get Company </button>
 
 <table mat-table [dataSource]="data" class="mat-elevation-z8" matSort>
     <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
         <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-        <td mat-cell *matCellDef="let element"> {{element[column] | cutText:3:'+date'}} </td>
+        <td mat-cell *matCellDef="let element"> {{element[column] | bycolumn:column}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;" (click)="selectItem(row)"></tr>
+
+<!--    *ngIf="itemSelected != row" (click)="selectItem(row)"-->
+
 </table>
 <mat-paginator [pageSizeOptions]="[10, 70, 200]" aria-label="Select page of users" ></mat-paginator>
 <!--<span *ngIf="itemType">{{itemType}}<span>-->
