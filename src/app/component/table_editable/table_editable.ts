@@ -1,5 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import {MatTableDataSource} from "@angular/material/table";
+import {CrudService} from "../crudform/crudform.service";
+import {MatDialog} from "@angular/material/dialog";
+import {MatSort} from "@angular/material/sort";
+import {MatPaginator} from "@angular/material/paginator";
+
+
+let columnNames:string[] = [] ;
+
+let ELEMENT_DATA: object[] = []
+
+ELEMENT_DATA.map(item => {
+    // console.log("{@@", Object.keys(item));
+    columnNames = [...new Set([...Object.keys(item) ,...columnNames ])]
+} );
+
 
 @Component({
     selector: 'app-root',
@@ -8,10 +24,57 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 
 
+
 export class TableEditable {
     title = 'inline-table-editor';
+    displayedColumns: string[] = columnNames;
+    data: object[] = ELEMENT_DATA;
+    dataSource!: MatTableDataSource<any>;
+    itemType: string = 'item';
 
-    // Mock Users Data
+    @ViewChild(MatSort) sort!: MatSort;
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+
+    getItemList() {
+        this._crudService.getItemList('company').subscribe({
+            next: (res) => {
+                this.dataSource = new MatTableDataSource(res);
+                this.dataSource.sort = this.sort;
+                this.dataSource.paginator = this.paginator;
+
+                ELEMENT_DATA = res;
+
+                // console.log("@@ getItemList",res)
+
+                columnNames = ['Действия', 'Удалить']
+
+                ELEMENT_DATA = ELEMENT_DATA.map(item => {
+                    console.log("@@ 02", item);
+                    let _item: {[k: string]: any} = item;
+                    // _item = item
+
+                    columnNames = [...new Set([...Object.keys(item) , ...columnNames ])]
+                    _item['Действия'] = "<i class='bi bi-save'></i>"
+                    return _item
+                } );
+
+                console.log("@@ ELEMENT_DATA",ELEMENT_DATA);
+
+                this.displayedColumns = columnNames;
+                // this.columnsToDisplay = columnNames;
+                this.data = ELEMENT_DATA;
+                this.itemType = 'company';
+
+                this.paginator._intl.itemsPerPageLabel="Компаний на странице";
+                this.paginator.pageSizeOptions=[9,18,37];
+
+            },
+            error: console.log,
+        });
+    }
+
+
     users: User[] =
         [
             {
@@ -65,6 +128,7 @@ export class TableEditable {
         ]
 
     userSelected: User = {} as User;
+    itemSelected: object = {};
     isEditing: boolean = false
 
     form = this.fb.group({
@@ -74,13 +138,30 @@ export class TableEditable {
     });
 
     constructor(
+        private _dialog: MatDialog,
+        private _crudService: CrudService,
         private fb: FormBuilder,
-    ) { }
+    ) {}
+
 
     Title = "Компании"
     Price = 121312.4
     _date = new Date()
     jso = {d:1,b:3}
+
+    selectItem(item: object) {
+        if(Object.keys(this.itemSelected).length === 0) {
+            this.itemSelected = item;
+            this.isEditing = true
+
+            // this.form.patchValue({
+            //     firstName: user.firstName,
+            //     lastName: user.lastName,
+            //     email: user.email
+            // })
+        }
+    }
+
 
     selectUser(user: User) {
         if(Object.keys(this.userSelected).length === 0) {
@@ -160,8 +241,11 @@ export class TableEditable {
 }
 
 export interface User {
-    id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
+    // [index: string]: string;
+    id: any;
+    firstName: any;
+    lastName: any;
+    email: any;
+    comment?: any;
+    // get: (name:string) => string;
 }

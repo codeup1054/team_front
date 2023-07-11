@@ -3,12 +3,17 @@
 <button mat-raised-button (click)="addColumn()"> Add column </button>
 <button mat-raised-button (click)="removeColumn()"> Remove column </button>
 <button mat-raised-button (click)="shuffle()"> Shuffle </button>
-<button class="border bg-orange-400 rounded-5  w-full py-0 px-4 mb-0 " mat-raised-button (click)="getItemList()">get Company </button>
+<button class="border bg-orange-400 rounded-5  w-full py-0 px-4 mb-0 "
+        mat-raised-button (click)="getItemList()">get Company </button>
 
 <table mat-table [dataSource]="data" class="mat-elevation-z8" matSort>
     <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
         <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-        <td mat-cell *matCellDef="let element"> {{element[column] | bycolumn:column}} </td>
+        <td [innerHTML] = "element[column] | bycolumn:column" mat-cell *matCellDef="let element" ></td> <!--{{element[column] | bycolumn:column}}-->
+        <td >
+            <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel1</button>
+            <button mat-raised-button color="primary" type="submit">{{data ? 'Update': 'Save'}}</button>
+        </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>

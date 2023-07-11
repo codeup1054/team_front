@@ -1,3 +1,6 @@
+### 2023-07-04
+https://js.devexpress.com/Demos/WidgetsGallery/Demo/TreeList/CellEditing/Angular/Light/
+
 ### 2023-07-03 
 2023-07-03  Dynamic columns Date format
 

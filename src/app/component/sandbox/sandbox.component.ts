@@ -54,6 +54,7 @@ console.log("{@@ columnNames", columnNames);
   styleUrls: ['sandbox.component.scss'],
   templateUrl: 'sandbox.component.html',
 })
+
 export class SandboxComponent implements OnInit{
 
   displayedColumns: string[] = columnNames;
@@ -86,8 +87,6 @@ export class SandboxComponent implements OnInit{
   ) {}
 
 /** >>> Get Data */
-
-
 
 
   addColumn() {
@@ -130,14 +129,13 @@ export class SandboxComponent implements OnInit{
 
           columnNames = ['Действия', 'Удалить']
 
-
           ELEMENT_DATA = ELEMENT_DATA.map(item => {
             console.log("@@ 02", item);
             let _item: {[k: string]: any} = item;
             // _item = item
 
-            columnNames = [...new Set([...Object.keys(item) ,...columnNames ])]
-            _item['Действия'] = '<i class="bi bi-save"></i>'
+            columnNames = [...new Set([...Object.keys(item) , ...columnNames ])]
+            _item['Действия'] = "<i class='bi bi-save'></i>"
             return _item
           } );
 
@@ -150,7 +148,6 @@ export class SandboxComponent implements OnInit{
 
           this.paginator._intl.itemsPerPageLabel="Компаний на странице";
           this.paginator.pageSizeOptions=[9,18,37];
-
 
         },
         error: console.log,

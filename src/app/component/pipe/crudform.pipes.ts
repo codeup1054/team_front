@@ -1,4 +1,4 @@
-import {Pipe, PipeTransform} from "@angular/core";
+import {Pipe, PipeTransform,  Renderer2 } from "@angular/core";
 import {DatePipe} from "@angular/common";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 
@@ -14,6 +14,7 @@ let cellTypes = {
     _s: '_string',
     date_end: 'picker',
     site: '_link',
+    "Действия": 'action',
 }
 
 console.log("@@ cellTypes", cellTypes['id'])
@@ -22,7 +23,9 @@ console.log("@@ cellTypes", cellTypes['id'])
 @Pipe({ name: 'bycolumn' })
 export class ByColumnPipe implements PipeTransform {
 
-    constructor(private sanitize: DomSanitizer) {}
+    constructor(
+        private sanitize: DomSanitizer,
+        private renderer : Renderer2) {}
 
     transform(
         value: string,
@@ -30,8 +33,8 @@ export class ByColumnPipe implements PipeTransform {
         maxLength: number = 10,
         ...args:string[]
     ): string {
-        // const a = column_name;
-        // console.log("@@ cellTypes", cellTypes, cellTypes[column_name as keyof typeof cellTypes], column_name );
+
+
 
         const _type = column_name in cellTypes ? cellTypes[column_name as keyof typeof cellTypes] : '_string';
 
@@ -39,9 +42,11 @@ export class ByColumnPipe implements PipeTransform {
             case '_num':
                 return value
             case '_link':
-                return value
+                return  value ? `<a href='${value}'>${value}</a>` : ''
+            case 'action':
+                    return `<button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>`
             case '_editable':
-                return value
+                return `${value}<input matInput type="text" value="${value}">`
             case 'date':
                 let formattedDate = datepipe.transform(value,'dd-MM-YYYY');
                 return <string>formattedDate;
