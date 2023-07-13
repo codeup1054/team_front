@@ -8,7 +8,6 @@ import {MatPaginator} from "@angular/material/paginator";
 
 
 let columnNames:string[] = [] ;
-
 let ELEMENT_DATA: object[] = []
 
 ELEMENT_DATA.map(item => {
@@ -48,9 +47,10 @@ export class TableEditable {
                 // console.log("@@ getItemList",res)
 
                 columnNames = ['Действия', 'Удалить']
+                columnNames = []
 
                 ELEMENT_DATA = ELEMENT_DATA.map(item => {
-                    console.log("@@ 02", item);
+                    // console.log("@@ 02", item);
                     let _item: {[k: string]: any} = item;
                     // _item = item
 
@@ -59,7 +59,7 @@ export class TableEditable {
                     return _item
                 } );
 
-                console.log("@@ ELEMENT_DATA",ELEMENT_DATA);
+                console.log("@@ getItemList ELEMENT_DATA",ELEMENT_DATA);
 
                 this.displayedColumns = columnNames;
                 // this.columnsToDisplay = columnNames;
@@ -67,13 +67,17 @@ export class TableEditable {
                 this.itemType = 'company';
 
                 this.paginator._intl.itemsPerPageLabel="Компаний на странице";
-                this.paginator.pageSizeOptions=[9,18,37];
+                this.paginator.pageSizeOptions=[5,9,37];
 
             },
             error: console.log,
         });
     }
 
+    ngOnInit(): void
+    {
+        this.getItemList();
+    }
 
     users: User[] =
         [
@@ -142,6 +146,8 @@ export class TableEditable {
         private _crudService: CrudService,
         private fb: FormBuilder,
     ) {}
+
+
 
 
     Title = "Компании"

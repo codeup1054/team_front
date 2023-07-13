@@ -1,9 +1,10 @@
 <div class="container">
+    <form [formGroup]="form" (ngSubmit)="update()">
     <h1>{{Title | uppercase}}</h1>
     <button class="border bg-orange-400 rounded-5  w-full py-0 px-4 mb-0 "
             mat-raised-button (click)="getItemList()">get Company </button>
 
-    <table mat-table [dataSource]="data" class="mat-elevation-z8" matSort>
+    <table mat-table [dataSource]="data" class="mat-elevation-z8" matSort MatPaginator>
         <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
             <th mat-header-cell *matHeaderCellDef> {{column}} </th>
             <td [innerHTML] = "element[column] | bycolumn:column" mat-cell *matCellDef="let element" ></td> <!--{{element[column] | bycolumn:column}}-->
@@ -11,16 +12,37 @@
                 <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel1</button>
                 <button mat-raised-button color="primary" type="submit">{{data ? 'Update': 'Save'}}</button>
             </td>
+            <td>
+                <button class="btn btn-primary btn-sm mx-1"
+                        title="update"
+                        type="submit"
+                        [disabled]="form.invalid" >
+                    <i class="bi bi-save"></i>
+                </button>
+                <button class="btn btn-danger btn-sm mx-1"
+                        title="cancel"
+                        (click)="cancel()"
+                        type="button">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </td>
         </ng-container>
 
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectItem(row)"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectItem(row)">777</tr>
 
         <!--    *ngIf="itemSelected != row" (click)="selectItem(row)"-->
 
     </table>
-    <mat-paginator [pageSizeOptions]="[10, 70, 200]" aria-label="Select page of users" ></mat-paginator>
+<!--        <mat-paginator [pageSizeOptions]="[9, 70, 200]" aria-label="Select page of users" ></mat-paginator>-->
+    </form>
 
+    <mat-paginator [length]="100"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   aria-label="Select page">
+    </mat-paginator>
 <!--        <form [formGroup]="form" (ngSubmit)="update()">-->
 <!--        <table [dataSource]="data" mat-table class="mat-elevation-z8" matSort>-->
 <!--            <thead>-->
