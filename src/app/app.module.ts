@@ -6,6 +6,8 @@ import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {BrowserModule} from '@angular/platform-browser';
 
+import { FormsModule } from '@angular/forms';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
@@ -27,18 +29,20 @@ import {MatMenuModule} from "@angular/material/menu";
 
 
 import {AppRoutingModule} from './app-routing.module';
+
+
+
 import {AppComponent} from './app.component';
 import {MemberAddEditComponent} from './component/member/member.component';
-
 import {MenubarComponent} from './component/menubar/menubar.component';
 import {CompanyComponent} from './component/company/company.component';
 import {TeamComponent} from './component/team/team.component';
 import {CrudformComponent} from './component/crudform/crudform.component';
 import {CutTextPipe, ByColumnPipe} from './component/pipe/crudform.pipes';
 import {SandboxComponent} from "./component/sandbox/sandbox.component";
-
 import { TableEditable } from './component/table_editable/table_editable'
-
+import {InlineEditingtwoComponent} from './component/inline-editingtwo/inline-editingtwo.component'
+import {BasicEditingComponent} from "./component/basic-editing/basic-editing.component";
 
 @NgModule({
     declarations: [AppComponent,
@@ -51,7 +55,9 @@ import { TableEditable } from './component/table_editable/table_editable'
         SandboxComponent,
         CutTextPipe,
         ByColumnPipe,
-        TableEditable
+        TableEditable,
+        InlineEditingtwoComponent,
+        BasicEditingComponent
     ],
     imports: [
         BrowserModule,
@@ -74,9 +80,10 @@ import { TableEditable } from './component/table_editable/table_editable'
         MatSortModule,
         MatSnackBarModule,
         MatMenuModule,
+        FormsModule,
     ],
   providers: [
-      // { provide: LOCALE_ID, useValue: "ru" }, //replace "en-US" with your locale
+      { provide: LOCALE_ID, useValue: "ru" }, //replace "en-US" with your locale
       ],
   bootstrap: [AppComponent],
 })

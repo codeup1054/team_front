@@ -46,7 +46,7 @@ export class ByColumnPipe implements PipeTransform {
             case 'action':
                     return `<button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>`
             case '_editable':
-                return `${value}<input matInput type="text" value="${value}">`
+                return value
             case 'date':
                 let formattedDate = datepipe.transform(value,'dd-MM-YYYY');
                 return <string>formattedDate;

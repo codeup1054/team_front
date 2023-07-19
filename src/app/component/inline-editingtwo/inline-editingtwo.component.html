@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-12">
+        <table class="table  table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Sr No</th>
+                    <th>Name</th>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>website</th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of items;let i= index">
+<!--                    <td>{{i+1}}</td>-->
+<!--                    <td (dblclick)="onEdit(item,'name')">-->
+<!--                        <div class="row" *ngIf="item.editFieldName == 'name'">-->
+<!--                            <div class="col-9">-->
+<!--                                <input type="text" [(ngModel)]="item.name" class="form-control"/>-->
+<!--                            </div>-->
+<!--                            <div class="col-3 text-center">-->
+<!--                                <i class="fa fa-check-circle-o" aria-hidden="true"></i>-->
+<!--                                <i class="fa fa-times ml-2 " aria-hidden="true" (click)="close(item)"></i>-->
+<!--                            </div>-->
+<!--                        </div> -->
+<!--                        <div *ngIf="item.editFieldName !== 'name'">-->
+<!--                            {{item.name}}-->
+<!--                        </div> -->
+<!--                    </td>-->
+<!--                    <td (dblclick)="onEdit(item,'itemname')">-->
+<!--                        <div *ngIf="item.editFieldName == 'itemname'">-->
+<!--                            <input type="text" [(ngModel)]="item.itemname" class="form-control"/>-->
+<!--                        </div>-->
+<!--                        <div *ngIf="item.editFieldName !== 'itemname'">-->
+<!--                            {{item.website}}-->
+<!--                        </div>-->
+<!--                    </td>-->
+<!--                    <td (dblclick)="onEdit(item,'email')">-->
+<!--                        <div *ngIf="item.editFieldName == 'email'">-->
+<!--                            <input type="text" [(ngModel)]="item.email" class="form-control"/>-->
+<!--                        </div>-->
+<!--                        <div *ngIf="item.editFieldName !== 'email'">-->
+<!--                            {{item.email}}-->
+<!--                        </div>-->
+<!--                    </td>-->
+<!--                    <td (dblclick)="onEdit(item,'phone')">-->
+<!--                        <div *ngIf="item.editFieldName == 'phone'">-->
+<!--                            <input type="text" [(ngModel)]="item.phone" class="form-control"/>-->
+<!--                        </div>-->
+<!--                        <div *ngIf="item.editFieldName !== 'phone'">-->
+<!--                            {{item.phone}}-->
+<!--                        </div>-->
+<!--                    </td>-->
+<!--                    <td (dblclick)="onEdit(item,'website')">-->
+<!--                        <div *ngIf="item.editFieldName == 'website'">-->
+<!--                            <input type="text" [(ngModel)]="item.website" class="form-control"/>-->
+<!--                        </div>-->
+<!--                        <div *ngIf="item.editFieldName !== 'website'">-->
+<!--                            {{item.website}}-->
+<!--                        </div>-->
+<!--                    </td>-->
+                        <td *ngFor="let column of tColumns.values()" (dblclick)="onEdit(item,column)">
+                            <div *ngIf="item.editFieldName == column">
+                                <input type="text" [(ngModel)]="item[column]" class="form-control"/>
+                            </div>
+                            <div  *ngIf="item.editFieldName !== column">
+                                {{item[column]}}
+                            </div>
+                        </td> <!--{{element[column] | bycolumn:column}}-->
+                </tr>
+            </tbody> 
+        </table>
+    </div>
+</div>

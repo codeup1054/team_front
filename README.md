@@ -1,3 +1,14 @@
+
+## 2023-07-19  
+### Optimize spinner, pipes , alert, unsubscribe
+https://www.youtube.com/watch?v=MB1E_vvhS78 
+
+
+### CRUD JSON.Stringify for oldItem
+https://www.youtube.com/watch?v=EprnYi2IKhg&t=991s
+### CRUD validation
+https://www.youtube.com/watch?v=tESwoSg9YLo 
+
 ### 2023-07-04
 https://js.devexpress.com/Demos/WidgetsGallery/Demo/TreeList/CellEditing/Angular/Light/
 

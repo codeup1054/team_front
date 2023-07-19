@@ -1,0 +1,63 @@
+
+
+<div class="row">
+    <div class="row">
+        <button class="btn btn_sm btn-primary" (click) = "onAdd()">Add</button>
+    </div>
+</div>
+<div class="row">
+<div class="col-12">
+        <table class="table table-bordered">
+            <thead>
+            <th>№</th>
+            <th *ngFor = "let col of columns">{{col}}</th>
+            <th>Action</th>
+            </thead>
+            <tr *ngFor = "let item of entityItems; let i = index;">
+                <td>{{i+1}}</td>
+                <td *ngFor = "let col of columns" >
+                    <div *ngIf = "item['isEdit']">
+                            <div *ngIf="types['picker'].indexOf(col)>=0">
+                                <mat-form-field >
+    <!--                                <mat-label>Choose a date</mat-label>-->
+                                    <input matInput [matDatepicker]="picker" [ngModel]="item[col]">
+    <!--                                <mat-hint>MM/DD/YYYY</mat-hint>-->
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div *ngIf="types['picker'].indexOf(col)<0">
+                                    <input type="text" [(ngModel)]="item[col]">
+                                <div class="text-danger" *ngIf="validateColumnValue(item[col], col)">
+                                    <span>{{validateColumnValue(item[col], col)}}</span>
+                                </div>
+                            </div>
+<!--                        <container-element [ngSwitch]="types">-->
+
+<!--                            {{types['picker'].indexOf(col)>=0}}-->
+
+<!--                            <div *ngSwitchDefault>-->
+<!--                                <input type="text" [(ngModel)]="item[col]">-->
+<!--                            </div>-->
+<!--                        </container-element>-->
+                    </div>
+                    <div *ngIf = "!item['isEdit']">
+                            {{item[col] | bycolumn: col}}
+                    </div>
+                </td>
+                <td class="text-center">
+                    <span *ngIf = "!item['isEdit']" class="text-center">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onEdit(item)"></i>
+                        <i class="fa fa-trash-o" aria-hidden="true" (click)="onDelete(item)"></i>
+                    </span>
+                    <span *ngIf = "item['isEdit']" class="text-center">
+                        <button class="btn btn-success btn-sm" [disabled]="validateForm(item)" >Update</button>
+                        <i class="fa fa-floppy-o" (click)="onUpdate(item)"></i>
+                        <i class="fa fa-times-circle" (click)="onCancel(item)"></i>
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
